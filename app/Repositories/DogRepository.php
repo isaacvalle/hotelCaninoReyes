@@ -8,7 +8,6 @@
 
 namespace App\Repositories;
 
-
 use Illuminate\Support\Facades\Log;
 use App\Models\Response;
 use App\Models\Dog;
@@ -84,8 +83,13 @@ class DogRepository
 
     public function show($dog_id)
     {
+        Log::info('Repository - Showing with dog_id: '.$dog_id);
         try {
-            $dog = Dog::with('breed:id,name')->find($dog_id);
+            $dog = Dog::with('breed:id,name')->
+                        with('color:id,color')->
+                        with('spots_color:id,color')->
+                        find($dog_id);
+            //$dog = Dog::find($dog_id);
             Log::debug('Dog: ' . $dog);
             if ($dog){
                 $this->response->setOk(true);
@@ -94,7 +98,7 @@ class DogRepository
                 $this->response->setStatusCode(200);
             } else {
                 $this->response->setOk(false);
-                $this->response->setMessage('An error has occur while getting the dog details. Please try later.');
+                $this->response->setMessage('The dog received not exist or something went wrong while trying to get it.');
                 $this->response->setStatusCode(500);
             }
         } catch(\Exception $e) {

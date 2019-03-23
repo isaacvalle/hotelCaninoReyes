@@ -15,7 +15,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        Log::info('Controller - Indexing colors');
+        Log::info('Controller - Indexing colors...');
         return Color::all('id', 'color');
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SizeCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SizeCategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class SizeCategoryController extends Controller
      */
     public function index()
     {
-        //
+        Log::info('Controller - Indexing sizes...');
+        return SizeCategory::all('id', 'name');
     }
 
     /**
