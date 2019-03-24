@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('{path}', 'HomeController@index')->where( 'path', '([A-z]+)?' );
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('{path}', function() { return view('welcome');})->where( 'path', '([A-z]+)?' );

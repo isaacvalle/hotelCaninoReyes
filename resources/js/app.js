@@ -17,7 +17,15 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-import { Form, HasError, AlertError } from 'vform';
+import { Form, HasError, AlertError }  from 'vform';
+import App from './App.vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import moment from 'moment';
+
+
+Vue.use(VueAxios, axios);
+window.moment = moment;
 
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
@@ -42,10 +50,13 @@ Vue.component(AlertError.name, AlertError)
 
 Vue.use(VueRouter);
 let routes = [
+    { path: '/', name: 'home', component: require('./components/Home.vue').default },
     { path: '/reservations', component: require('./components/Reservations.vue').default },
     { path: '/services', component: require('./components/Services.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
-    { path: '/dogs', component: require('./components/Dogs.vue').default }
+    { path: '/dogs', component: require('./components/Dogs.vue').default },
+    { path: '/login', name:'login', component: require('./components/Login.vue').default },
+    { path: '/dashboard', name:'dashboard', component: require('./components/Dashboard.vue').default}
 ]
 
 const router = new VueRouter({
@@ -53,19 +64,34 @@ const router = new VueRouter({
     routes
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!auth.loggedIn()) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+});
+
 Vue.component(
     'passport-clients',
-    require('./components/passport/Clients.vue')
+    require('./components/passport/Clients.vue').default
 );
 
 Vue.component(
     'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue')
+    require('./components/passport/AuthorizedClients.vue').default
 );
 
 Vue.component(
     'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue')
+    require('./components/passport/PersonalAccessTokens.vue').default
 );
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -78,5 +104,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-    router: router
+    router: router,
+    axios,
+    render: app => app(App)
 });

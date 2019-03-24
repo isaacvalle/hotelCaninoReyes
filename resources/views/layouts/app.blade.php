@@ -23,7 +23,7 @@
     <link href="{{ asset('css/nav-bar.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div>
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-static-top">
         <div class="container">
             <a class="navbar-brand sticky-top flex-md-nowrap" href="{{ url('/') }}">

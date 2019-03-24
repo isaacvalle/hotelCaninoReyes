@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -42,8 +44,24 @@ class LoginController extends Controller
      *
      * @return response
      */
-    /*public function login(Request $request) {
-        $this->validateLogin($request);
+    public function login(Request $request) {
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+            $token = $user->createToken('hcr');
+            $accessToken = $token->accessToken;
+            $refreshToken = $token->refreshToken;
+            return response()->json([
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
+                'user' => $user,
+                'redirectTo' => '/home'
+            ], 200);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        /*$this->validateLogin($request);
 
         if($this->attemptLogin($request)) {
             $user = $this->guard()->user();
@@ -54,8 +72,8 @@ class LoginController extends Controller
             ]);
         }
 
-        return $this->sendFailedLoginResponse($request);
-    }*/
+        return $this->sendFailedLoginResponse($request);*/
+    }
 
     /**
      * Logout

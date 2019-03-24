@@ -27,15 +27,13 @@ class UpdateDog extends FormRequest
     {
         return [
             'name' => 'bail|string|min:3|max:100',
-            'breed_id' => 'bail|numeric|exits:breeds,id',
+            'breed_id' => 'bail|numeric',
             'gender' => 'boolean',
             'picture' => 'url',
-            'dob' => 'date_format:Y-m-d',
-            'color_id' => 'numeric|exists:colors,id',
-            'spots_color_id' => 'numeric|exists:colors,id',
-            'size_id' => 'numeric|exists:size_categories,id',
+            'color_id' => 'numeric',
+            'spots_color_id' => 'numeric',
+            'size_id' => 'numeric',
             'sterialized' => 'boolean',
-            'lunch_time' => 'date_format:H:i',
             'friendly' => 'boolean',
             'observations' => 'string|min:5|max:255'
         ];

@@ -1,16 +1,21 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Here services</div>
+    <div>
+        <Dashboard></Dashboard>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">Here services</div>
 
-                    <div class="card-body">
-                        User logged in: {{ users.id }}
+                            <div class="card-body">
+                                User logged in: {{ users.id }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </template>
 

@@ -1,20 +1,38 @@
 <template>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Reservaciones</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Crear</button>
-                <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+    <div>
+        <Dashboard></Dashboard>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Reservaciones</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button class="btn btn-sm btn-outline-secondary">Crear</button>
+                        <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <Calendar width="19" height="19" stroke-width="1.5" stroke="gray"></Calendar>
+                        Hoy
+                    </button>
+                </div>
             </div>
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                Hoy
-            </button>
-        </div>
+            <div class="container">
+                <div class="row">
+                    <div id="rooms" class="col-md-6">
+                        <a href="#"><Home width="52" height="52" stroke="gray" stroke-width="1" fill="green"></Home></a>
+                        <a href="#"><Home width="52" height="52" stroke="gray" stroke-width="0.5" fill="none"></Home></a>
+                    </div>
+                    <div id="services" class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </template>
 
 <script>
+    import { Calendar, Home } from 'vue-feather-icon';
+
     export default {
         data() {
             return {
@@ -25,7 +43,7 @@
             getUsers() {
                 axios.get("api/user", {
                     headers: {
-                        "Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQzNjA2MzAzODRmMjY1N2NjMzAxMjQzMWUyZGIxZDBkNDFjNThmMDk4Mjk2YmU3M2QzOTlkYzQwOGU1NmQ2MjZlMDVlMWY2YzkzYWUyMDgyIn0.eyJhdWQiOiI0IiwianRpIjoiZDM2MDYzMDM4NGYyNjU3Y2MzMDEyNDMxZTJkYjFkMGQ0MWM1OGYwOTgyOTZiZTczZDM5OWRjNDA4ZTU2ZDYyNmUwNWUxZjZjOTNhZTIwODIiLCJpYXQiOjE1NTIwODkzNDcsIm5iZiI6MTU1MjA4OTM0NywiZXhwIjoxNTUyMDk1MzQzLCJzdWIiOiIyNyIsInNjb3BlcyI6W119.aX7dJ_uTTJvVTprlJEjm3tHsG9RAHVem-HoVhVLZIGM7xLq61MFZj_DJnJ9eL1I0Y_bBw7ivySP_n8Idx-nXMju1aFdQ95-gzX-Of9BbiOM6IsfvtvERA0IsQeyLBJEMGvHs4Rq7k5A2dOAe7yYR6_orldgpdX0tQdo_Qj8SCvKj5PJx6UAOE2qy48F9TC7RXqsJWp07lzttvReY0jmTxn3sotu1sRbDO9Wu6hGmCZjpqDw4hkvyx9O5znxJik_cjjGvN5AY8-I6f4XyDX6mFDotacaAMdLys2vtCSKyPjcVbym-DbylaAPL0IzbA4Guu3JpMH73NuY098wvJTX5r-X0lkHadPtzkR_2hyRzDNEYarvzXcOd828YB1oFEiOQUaqrUZHEkRgRjv7jLuaod6Gw5NrwfjWnPN7euRYYer4hhWEHSdRG3uTYZ8yTawkt7rJZHDJP_yVCXclAn8Zc4pspB6Ote1uajVEck1ykanMZ7yp5AULRtHfeAMbadi17F4E9Swoz6cRox7jZP8fvXDMwgyyF_tIobJTDEXQ8hvAjDO57v662WkPzo6XcAIdULEVi1fpN4pT4aaIV1m1OdVHA_K5FqnYV54YT4CydvxmTxT65_hCt8B_1ddzulzZ3qfnmhJsiKJdZ3Hz0RPrjPLuzEuHpZs0zdafZhh8m5vA"
+                        "Authorization" : "Bearer " + localStorage.token
                     }
                 }).then(
                     ({data}) => (this.users = data)
@@ -34,10 +52,22 @@
         },
         created() {
             this.getUsers();
+        },
+        components: {
+            Calendar, Home
         }
     }
 </script>
 
 <style scoped>
+    #rooms {
+        //border: solid 4px red;
 
+        height: auto;
+    }
+
+    #services {
+        //border: solid 4px green;
+        height: auto;
+    }
 </style>

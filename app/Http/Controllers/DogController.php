@@ -81,7 +81,7 @@ class DogController extends Controller
      */
     public function show(Request $request, $dog_id)
     {
-        Log::info('Controller - dog store endpoint has been called.');
+        Log::info('Controller - dog show endpoint has been called.');
         $response = $this->dogService->show($request->user()->id, $dog_id);
 
         return Response::json([
