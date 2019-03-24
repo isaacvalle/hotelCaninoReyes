@@ -30,7 +30,7 @@ class StoreDog extends FormRequest
             'name' => 'bail|required|string|min:3|max:100',
             'breed_id' => 'bail|required|numeric',
             'gender' => 'bail|required|boolean',
-            'picture' => 'url',
+            'picture' => 'string',
             'dob' => 'required|date_format:Y-m-d',
             'color_id' => 'bail|required|numeric',
             'spots_color_id' => 'numeric',

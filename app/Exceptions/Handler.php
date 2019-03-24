@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
             'message' => 'Unauthenticated.',
             'status_code' => 401,
             'ok' => false
-        ), 401);
+        ), 200);
       }
       return redirect()->guest('login');
     }
