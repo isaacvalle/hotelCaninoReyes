@@ -67,7 +67,7 @@
         },
         methods: {
             login() {
-                this.$http.post('oauth/token',{ username: this.email, password: this.password, grant_type: 'password', client_id: '4', client_secret: 'hZzT2z5m1y8OLdMBhL1uxF3Z2pJZTrxbHdUT29Ra' })
+                this.$http.post('oauth/token',{ username: this.email, password: this.password, grant_type: 'password', client_id: '2', client_secret: 'Ffdrmj4lZvq5loGERKyhmrDMdKwFnuRushKSU1d8' })
                     .then(response => this.loginSuccessful(response))
                     .catch(() => this.loginFailed())
             },

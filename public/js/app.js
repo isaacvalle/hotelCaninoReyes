@@ -2580,8 +2580,8 @@ __webpack_require__.r(__webpack_exports__);
         username: this.email,
         password: this.password,
         grant_type: 'password',
-        client_id: '4',
-        client_secret: 'hZzT2z5m1y8OLdMBhL1uxF3Z2pJZTrxbHdUT29Ra'
+        client_id: '2',
+        client_secret: 'Ffdrmj4lZvq5loGERKyhmrDMdKwFnuRushKSU1d8'
       }).then(function (response) {
         return _this.loginSuccessful(response);
       }).catch(function () {
@@ -73741,6 +73741,7 @@ exports.X = __webpack_require__(/*! ./components/x.vue */ "./node_modules/vue-fe
 exports.Zap = __webpack_require__(/*! ./components/zap.vue */ "./node_modules/vue-feather-icon/components/zap.vue").default
 exports.ZoomIn = __webpack_require__(/*! ./components/zoom-in.vue */ "./node_modules/vue-feather-icon/components/zoom-in.vue").default
 exports.ZoomOut = __webpack_require__(/*! ./components/zoom-out.vue */ "./node_modules/vue-feather-icon/components/zoom-out.vue").default
+
 
 /***/ }),
 
